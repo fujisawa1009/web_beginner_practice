@@ -1,0 +1,23 @@
+/Users/yuta.fujisawa/path/to/projects_directory/daison/web_beginner_practice/foods/index.erb
+
+<html>
+<head>
+  <meta charset='utf-8'>
+</head>
+<body>
+<h1>Foods一覧</h1>
+<form action="/foods" method='post'>
+  <select name="category">
+    <option value="all" selected>全て</option>
+    <option value="fruits">フルーツ</option>
+    <option value="vegetables">野菜</option>
+  </select>
+  <button Type='submit'>検索</button>
+</form>
+<ul>
+  <% @foods.each do |value| %>
+    <li><%= value[:name] %></li>
+  <% end %>
+</ul>
+</body>
+</html>
