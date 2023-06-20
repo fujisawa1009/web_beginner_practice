@@ -28,13 +28,11 @@ server.mount_proc("/foods") do |req, res|
     # ここにロジックを書く
     @slect_params = req.query['category']
     if @slect_params.nil?
-        @foods = foods[0..5]
+      @foods = foods
     elsif @slect_params == "all"
-        @foods = foods[0..5]
-    elsif @slect_params == "fruits"
-        @foods = foods[0..2]
-    elsif @slect_params == "vegetables"
-        @foods = foods[3..5]
+      @foods = foods
+    else
+        @foods.select{|f| f[:category] == @slect_params}
     end
     res.body << template.result( binding )
 end
