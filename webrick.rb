@@ -1,6 +1,3 @@
-webrick.rb
-
-
 # webrick.rb
 require 'webrick'
 require "erb"
