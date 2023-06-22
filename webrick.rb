@@ -9,11 +9,8 @@ server = WEBrick::HTTPServer.new({
                                  })
 
 trap(:INT){
-    server.shutdown
+  server.shutdown
 }
-
-WEBrick::HTTPServlet::FileHandler.add_handler("erb", WEBrick::HTTPServlet::ERBHandler)
-server.config[:MimeTypes]["erb"] = "text/html"
 
 foods = [
   { id: 1, name: "りんご", category: "fruits" },
@@ -24,16 +21,16 @@ foods = [
   { id: 6, name: "レタス", category: "vegetables" },
 ]
 server.mount_proc("/foods") do |req, res|
-    template = ERB.new( File.read('./foods/index.erb') )
-    # ここにロジックを書く
-    @slect_params = req.query['category']
-    if @slect_params.nil?
-      @foods = foods
-    elsif @slect_params == "all"
-      @foods = foods
-    else
-        @foods.select{|f| f[:category] == @slect_params}
-    end
-    res.body << template.result( binding )
+  template = ERB.new( File.read('./foods/index.erb') )
+  # ここにロジックを書く
+  @slect_params = req.query['category']
+  if @slect_params.nil?
+    @foods = foods
+  elsif @slect_params == "all"
+    @foods = foods
+  else
+    @foods = foods.select{|f| f[:category] == @slect_params}
+  end
+  res.body << template.result( binding )
 end
 server.start
