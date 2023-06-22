@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<h1>Foods一覧</h1>
+<form action="/foods" method="post">
+    <select name="category">
+        <% if @slect_params == "all" %>
+        <option value="all" selected>全て</option>
+        <% else %>
+        <option value="all">全て</option>
+        <% end %>
+        <% if @slect_params == "fruits" %>
+        <option value="fruits" selected>フルーツ</option>
+        <% else %>
+        <option value="fruits">フルーツ</option>
+        <% end %>
+        <% if @slect_params == "vegetables" %>
+        <option value="vegetables" selected>野菜</option>
+        <% else %>
+        <option value="vegetables">野菜</option>
+        <% end %>
+    </select>
+    <button type="submit">検索</button>
+</form>
+<ul>
+    <% if @foods.nil? %>
+    <% else %>
+    <% @foods.each do |value| %>
+    <li><%= value[:name] %></li>
+    <% end %>
+    <% end %>
+</ul>
+</body>
+</html>
